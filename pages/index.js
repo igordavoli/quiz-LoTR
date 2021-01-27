@@ -1,41 +1,49 @@
 import styled from 'styled-components'
 import db from '../db.json'
+import Widget from '../src/components/Widget'
+import Footer from '../src/components/Footer'
+import GitHubCorner from '../src/components/GitHubCorner'
+import QuizBackground from '../src/components/QuizBackground'
 
-const BackgroundImage = styled.div`
-  background-image: url(${db.bg});
-  height: 100vh;
-  width: 100vw; 
-  background-size: cover;
-  background-position: center;
-`;
+// const BackgroundImage = styled.div`
+//   background-image: url(${db.bg});
+//   flex: 1;
+//   background-size: cover;
+//   background-position: center;
+// `;
 
-const Widget = styled.div`
-margin: 10px;
-padding: 0 15px 0 15px;
-border: 1px solid #4caf50;
-background-color: ${db.theme.colors.primary}dd;
-border-radius: 7px;
-overflow: hidden; 
-color: ${db.theme.colors.contrastText};
-@media (min-width: 650px){
-  width: 350px;
-  margin-left: 20vw
+export const QuizContainer = styled.div `
+width: 100%;
+max-width: 350px;
+padding-top: 45px;
+margin: auto 10%;
+@media screen and (max-width: 500px){
+  margin: auto;
+  padding: 15px;
 }
-`
+`;
 
 export default function Home() {
   return (
-      <BackgroundImage>
-        <Widget>
-          <h2>The lord of the rings</h2>
-          <p>loren ipsilum</p>
-        </Widget>
-
-        <Widget>
-        <h2>Quizes da galera</h2>
-          <p>loren ipsilum</p>
-        </Widget>
-
-      </BackgroundImage>
+      <QuizBackground backgroundImage={db.bg}>
+        <QuizContainer>
+          <Widget>
+            <Widget.header>
+                <h1>The lord of the rings</h1>
+            </Widget.header>
+            <Widget.content >
+              <p>loren ipsilum</p>
+            </Widget.content>
+          </Widget>
+          <Widget>
+            <Widget.content>
+              <h2>Quizes da galera</h2>
+              <p>loren ipsilum</p>
+            </Widget.content>
+          </Widget>
+          <Footer />
+        </QuizContainer>
+        <GitHubCorner projecUrl="https://github.com/omariosolto"/>
+      </QuizBackground>
   )
 }
