@@ -1,7 +1,5 @@
-import styled from 'styled-components';
 import { useRouter } from 'next/router'
 import db from '../db.json';
-import Logo from '../src/components/Logo'
 import Widget from '../src/components/Widget';
 import Input from '../src/components/Input';
 import Button from '../src/components/Button'
@@ -9,56 +7,66 @@ import GitHubCorner from '../src/components/GitHubCorner';
 import QuizBackground from '../src/components/QuizBackground';
 import QuizContainer from '../src/components/QuizContainer';
 
-
-
-function QuestionWidget({ question, numberOfQuestions, questionIndex ,alternatives}) {
-  const questionId =  ` question_${questionIndex}`
-
+function QuestionWidget({
+  question,
+  numberOfQuestions,
+  questionIndex,
+  alternatives,
+  onSubmit,
+}) {
+  const questionId = ` question_${questionIndex}`
+  const [selectedAlternative, setSelectAlternative] = React.useState(undefined);
+  const isCorrect = selectedAlternative === question.answer;
+  
   return (
     <Widget>
-    <Widget.header>
-      <h1>{`Pergunta ${questionIndex + 1} de ${numberOfQuestions}`}</h1>
-    </Widget.header>
-    <img 
-      alt="Descrição"
-      style={{
-        marginTop: '5px',
-        width: '100%',
-        height: '150px',
-        objectFit: 'scale-down',
-      }}
-      src={question.image}
-    />
-    <Widget.content >
-     <h2>{question.title}</h2>
-     <p>{question.description}</p>
-      
-      <form 
-        onSubmit={(event)=>{
-          event.preventDefault();
-          // onSubmit()
-        }}>
-        {alternatives.map((alternative, alternativeIndex) => {
-          const alternativeId = `alternative_${alternativeIndex}`
-          return (
-          <Widget.topic htmlFor={alternativeId} as='label'>
-            <input
-            /*style={{display:'none'}}*/ 
-            type="radio" id={alternativeId} name={questionId}/>  
-            {alternative} 
-          </Widget.topic>)
-        })}
+      <Widget.header>
+        <h1>{`Pergunta ${questionIndex + 1} de ${numberOfQuestions}`}</h1>
+      </Widget.header>
+      <img
+        alt="Descrição"
+        style={{
+          marginTop: '5px',
+          width: '100%',
+          height: '150px',
+          objectFit: 'scale-down',
+        }}
+        src={question.image}
+      />
+      <Widget.content >
+        <h2>{question.title}</h2>
+        <p>{question.description}</p>
 
-      </form>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            onSubmit()
+          }}>
 
-      <Button 
-      type="submit"
-      value=''
-      >
-        Confirmar
-      </Button>
-    </Widget.content>
-  </Widget>
+          {alternatives.map((alternative, alternativeIndex) => {
+            const alternativeId = `alternative_${alternativeIndex}`
+            return (
+              <Widget.topic
+                as='label'
+                key={alternativeId}
+                htmlFor={alternativeId}
+              >
+                <input
+                  type="radio"
+                  id={alternativeId}
+                  name={questionId}
+                  onChange={() => setSelectAlternative(alternativeIndex)}
+                />
+                {alternative}
+              </Widget.topic>)
+          })}
+
+          <Button type="submit" value=''>
+            Confirmar
+          </Button>
+        </form>
+      </Widget.content>
+    </Widget>
   );
 }
 
@@ -76,9 +84,8 @@ function LoadingWidget() {
   );
 }
 
-
 const screenStates = {
-  QUIZ: 'QUIZ',  
+  QUIZ: 'QUIZ',
   LOADING: 'LOADING',
   RESULT: 'RESULT',
 };
@@ -94,37 +101,46 @@ export default function QuizPage() {
 
   React.useEffect(() => {
     setTimeout(() => {
-    setScreenState(screenStates.QUIZ)  
+      setScreenState(screenStates.QUIZ)
     }, 1 * 1000);
     //nasce === didMount
-  }, []) 
-  
-  function handleSubmit() {
-    const nexQuestion = questionIndex + 1;
-    if (nexQuestion < numberOfQuestions) {
-      currentQuestion(questionIndex + 1);
+  }, [])
+
+  function handleSubmitQuiz() {
+    const res = `Você  ${isCorrect && 'acertou' || 'errou'}`
+    
+    if (questionIndex < numberOfQuestions - 1) {
+      setCurrentQuestion(questionIndex + 1);
     } else {
-      
-    }  
+      setScreenState(screenStates.RESULT);
+    }
   }
+
   return (
     <QuizBackground backgroundImage={db.bg}>
       <QuizContainer>
         {screenState === screenStates.QUIZ && (
-          <QuestionWidget 
+          <QuestionWidget
             question={question}
             questionIndex={questionIndex}
             numberOfQuestions={numberOfQuestions}
-            alternatives={alternatives} 
-            onSubmit={handleSubmit}
-          /> 
+            alternatives={alternatives}
+            onSubmit={handleSubmitQuiz}
+          />
         )}
 
-        {screenState === screenStates.LOADING  && <LoadingWidget/>}      
-        
-        {screenState === screenStates.RESULT && <Widget style={{padding: '20px'}}>Parabéns, você acertou XX questões</Widget>}
+        {screenState === screenStates.LOADING && (
+          <LoadingWidget />
+        )}
+
+        {screenState === screenStates.RESULT && (
+          <Widget style={{ padding: '20px' }}>
+            Parabéns, você acertou XX questões
+          </Widget>
+        )}
+
       </QuizContainer>
-      <GitHubCorner projecUrl="https://github.com/omariosolto"/>
+      <GitHubCorner projecUrl="https://github.com/omariosolto" />
     </QuizBackground>
   )
 }

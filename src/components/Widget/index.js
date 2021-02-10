@@ -27,6 +27,7 @@ Widget.header = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 0;
   padding: 18px 32px;
   background-color: ${({ theme }) => theme.colors.primary};
   * {

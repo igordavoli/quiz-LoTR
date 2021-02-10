@@ -19,8 +19,8 @@ export default function InputFunc({ onChange, placeholder }) {
       <Input onChange={onChange} placeholder={ placeholder }/>
     </div>
   )
-  
 } 
+
 InputFunc.defaultProps = {
   value: '',
 };

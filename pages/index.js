@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import db from '../db.json';
 import Head from 'next/head';
-import Logo from '../src/components/Logo'
+import Logo from '../src/components/Logo';
 import Widget from '../src/components/Widget';
 import Input from '../src/components/Input';
 import Button from '../src/components/Button'
@@ -22,7 +22,6 @@ import QuizContainer from '../src/components/QuizContainer';
 export default function Home() {
   const router = useRouter();
   const [name, setName] = React.useState('');
-  console.log(name, setName)
   
   return (
     <QuizBackground backgroundImage={db.bg}>
