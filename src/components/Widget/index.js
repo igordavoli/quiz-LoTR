@@ -28,12 +28,16 @@ Widget.header = styled.header`
   align-items: center;
 
   border-radius: 0;
-  padding: 18px 32px;
+  padding: 18px 32px 18px 0;
   background-color: ${({ theme }) => theme.colors.primary};
+    h1 {
+      margin: auto;
+    }
   * {
     margin: 0;
   }
 `;
+
 Widget.content = styled.div`
   padding: 24px 32px 32px 32px;
   display: flex;
