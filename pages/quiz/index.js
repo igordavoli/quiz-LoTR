@@ -53,6 +53,7 @@ function QuestionWidget({
         <p>{question.description}</p>
 
         <AlternativesForm
+          className="form"
           onSubmit={(event) => {
             event.preventDefault();
             setIsQuestionSubmited(true)
@@ -136,6 +137,7 @@ function ResultWidget({ results, numberOfQuestions }) {
           {results.map((res, i) => (
             <li
               key={`result_${results}`}
+
             >
               {`# ${i + 1} - ${res === true ? 'Acertou' : 'Errou'}`}
             </li>

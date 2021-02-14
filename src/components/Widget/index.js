@@ -51,8 +51,11 @@ Widget.content = styled.div`
     list-style: none;
     padding: 0; 
   }
+  .form {
+    width: 100%;
+  }
   img {
-  margin-left: 70px;
+  margin: 0 auto;
   }
 `;
 
