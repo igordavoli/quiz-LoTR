@@ -21,7 +21,18 @@ function QuestionWidget({
   const isQuestionsCorrect = selectedAlternative === question.answer;
   const hasAlternativeSelected = selectedAlternative !== undefined;
   return (
-    <Widget>
+    <Widget
+      as={motion.section}
+      initial="hidden"
+      transition={{
+        duration: 0.2
+      }}
+      variants={{
+        show: { opacity: 1, y: '0' },
+        hidden: { opacity: 0, y: '-5%' },
+      }}
+      animate="show"
+    >
       <Widget.header>
         <BackArrow href="/" />
         <h1>{`Pergunta ${questionIndex + 1} de ${numberOfQuestions}`}</h1>
@@ -62,7 +73,7 @@ function QuestionWidget({
                 key={alternativeId}
                 htmlFor={alternativeId}
                 data-Selected={isSelected}
-                data-status={ isQuestionSubmited && alternativeStatus}
+                data-status={isQuestionSubmited && alternativeStatus}
               >
                 <input
                   hidden
@@ -78,9 +89,9 @@ function QuestionWidget({
           <Button type="submit" disabled={!hasAlternativeSelected}>
             Confirmar
           </Button>
-          {isQuestionSubmited && isQuestionsCorrect && <p>Acertou</p> }
+          {isQuestionSubmited && isQuestionsCorrect && <p>Acertou</p>}
 
-          {isQuestionSubmited && !isQuestionsCorrect && <p>errou</p> }
+          {isQuestionSubmited && !isQuestionsCorrect && <p>errou</p>}
         </AlternativesForm>
       </Widget.content>
     </Widget>
@@ -89,9 +100,20 @@ function QuestionWidget({
 
 function ResultWidget({ results, numberOfQuestions }) {
   return (
-    <Widget>
+    <Widget
+      as={motion.section}
+      initial="hidden"
+      transition={{
+        duration: 0.2
+      }}
+      variants={{
+        show: { opacity: 1, y: '0' },
+        hidden: { opacity: 0, y: '-5%' },
+      }}
+      animate="show"
+    >
       <Widget.header>
-        Resutado  
+        Resutado
       </Widget.header>
 
       <Widget.content>
@@ -103,21 +125,21 @@ function ResultWidget({ results, numberOfQuestions }) {
             ${numberOfQuestions}
             perguntas
           `}
-            {/* ${results.reduce((soma, resultado) => { 
+          {/* ${results.reduce((soma, resultado) => { 
                  resultado === true && soma ++;
                 return soma;
               }, 0) 
              } */}
         </p>
-         <ul>
+        <ul>
           {results.map((res, i) => (
-            <li 
+            <li
               key={`result_${results}`}
             >
-              {`# ${i + 1} - ${res === true? 'Acertou' : 'Errou'}`}
+              {`# ${i + 1} - ${res === true ? 'Acertou' : 'Errou'}`}
             </li>
-          ) )} 
-  
+          ))}
+
         </ul>
       </Widget.content>
     </Widget>
@@ -126,13 +148,24 @@ function ResultWidget({ results, numberOfQuestions }) {
 
 function LoadingWidget() {
   return (
-    <Widget>
+    <Widget
+      as={motion.section}
+      initial="hidden"
+      transition={{
+        duration: 0.2
+      }}
+      variants={{
+        show: { opacity: 1, y: '0' },
+        hidden: { opacity: 0, y: '-5%' },
+      }}
+      animate="show"
+    >
       <Widget.header>
         Carregando...
       </Widget.header>
 
       <Widget.content>
-      <img src={db.loadingGif} height="75px" width=""/>      
+        <img src={db.loadingGif} height="75px" width="" />
       </Widget.content>
     </Widget>
   );
@@ -169,7 +202,7 @@ export default function QuizPage({ externalQuestions, externalBg }) {
     //nasce === didMount
   }, [])
 
-  function handleSubmitQuiz() {   
+  function handleSubmitQuiz() {
     if (questionIndex < numberOfQuestions - 1) {
       setCurrentQuestion(questionIndex + 1);
     } else {
@@ -196,7 +229,7 @@ export default function QuizPage({ externalQuestions, externalBg }) {
         )}
 
         {screenState === screenStates.RESULT && (
-          <ResultWidget results={results} numberOfQuestions={ numberOfQuestions} />
+          <ResultWidget results={results} numberOfQuestions={numberOfQuestions} />
         )}
 
       </QuizContainer>
