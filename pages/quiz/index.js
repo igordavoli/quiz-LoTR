@@ -1,5 +1,6 @@
 import db from '../../db.json';
 import Widget from '../../src/components/Widget';
+import { motion } from 'framer-motion';
 import Button from '../../src/components/Button'
 import GitHubCorner from '../../src/components/GitHubCorner';
 import QuizBackground from '../../src/components/QuizBackground';
