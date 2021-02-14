@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Input = styled.input`
-  width: 260px;
+  width: 248px;
   padding: 15px;
   font-size: 14px;
   border: 1px solid ${({ theme }) => theme.colors.primary};
@@ -19,15 +19,12 @@ const Input = styled.input`
 
 export default function InputFunc({ onChange, placeholder, ...props }) {
   return(
-    <div>
+  
     <Input
       placeholder={placeholder}
       onChange={onChange}
       // eslint-disable-next-line react/jsx-props-no-spreading
-
-    />
-  </div> 
-   
+    />   
   )
 } 
 

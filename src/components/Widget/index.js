@@ -36,6 +36,10 @@ Widget.header = styled.header`
 `;
 Widget.content = styled.div`
   padding: 24px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
   & > *:first-child {
     margin-top: 0;
   }

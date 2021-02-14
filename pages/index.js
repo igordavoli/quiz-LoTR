@@ -38,21 +38,20 @@ export default function Home() {
           <Widget.header>
             <h1>The lord of the rings</h1>
           </Widget.header>
-          <Widget.content >
-            <form
-              className="form"
-              onSubmit={event => {
-                event.preventDefault();
-                router.push(`/quiz?name=${name}`);
-              }}
-            >
-              <Input
-                nome="userName"
-                placeholder="Diz seu nome aí!"
-                onChange={event => setName(event.target.value)}
-              />
-              <Button type="submit" disabled={name === ''}>Jogar</Button>
-            </form>
+          <Widget.content 
+            as="form"
+            className="form"
+            onSubmit={event => {
+              event.preventDefault();
+              router.push(`/quiz?name=${name}`);
+            }}
+          > 
+            <Input
+              nome="userName"
+              placeholder="Diz seu nome aí!"
+              onChange={event => setName(event.target.value)}
+            />
+            <Button type="submit" disabled={name === ''}>Jogar</Button>
           </Widget.content>
         </Widget>
         <Widget
