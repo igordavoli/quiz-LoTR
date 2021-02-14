@@ -24,7 +24,7 @@ const Widget = styled.div`
 `;
 Widget.header = styled.header`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 
   border-radius: 0;

@@ -115,7 +115,7 @@ function ResultWidget({ results, numberOfQuestions }) {
       animate="show"
     >
       <Widget.header>
-        Resutado
+        <h1 style={{margin: "0 0 0 32px"}}>Resutado</h1>
       </Widget.header>
 
       <Widget.content>
@@ -139,7 +139,7 @@ function ResultWidget({ results, numberOfQuestions }) {
               key={`result_${results}`}
 
             >
-              {`# ${i + 1} - ${res === true ? 'Acertou' : 'Errou'}`}
+              { res && `#${i + 1} - O` || `#${i + 1} - X` }
             </li>
           ))}
 
