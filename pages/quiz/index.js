@@ -90,9 +90,9 @@ function QuestionWidget({
           <Button type="submit" disabled={!hasAlternativeSelected}>
             Confirmar
           </Button>
-          {isQuestionSubmited && isQuestionsCorrect && <p>Acertou</p>}
+          {/* {isQuestionSubmited && isQuestionsCorrect && <p>Acertou</p>}
 
-          {isQuestionSubmited && !isQuestionsCorrect && <p>errou</p>}
+          {isQuestionSubmited && !isQuestionsCorrect && <p>errou</p>} */}
         </AlternativesForm>
       </Widget.content>
     </Widget>
