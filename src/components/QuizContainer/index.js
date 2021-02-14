@@ -7,8 +7,8 @@ padding-top: 10px;
 margin: auto 12.5%;
 @media screen and (max-width: 500px){
   margin: auto;
-  padding: 15px;
+  padding: 15px; 
 }
-`;
+`; 
 
 export default QuizContainer

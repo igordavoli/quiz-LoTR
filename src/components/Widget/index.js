@@ -23,10 +23,10 @@ const Widget = styled.div`
   }
 `;
 Widget.header = styled.header`
-  justify-content: flex-start;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
+
   border-radius: 0;
   padding: 18px 32px;
   background-color: ${({ theme }) => theme.colors.primary};
@@ -42,9 +42,13 @@ Widget.content = styled.div`
   & > *:last-child {
   margin-bottom: 0;
   }
+
   ul {
     list-style: none;
     padding: 0; 
+  }
+  img {
+  margin-left: 70px;
   }
 `;
 
